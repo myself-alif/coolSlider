@@ -1,9 +1,24 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
-
-.wp-block-create-block-coolslider {
-	border: 1px dotted #f00;
+.wp-block-blocks-coolslider {
+	.edit-mode {
+		padding: 40px;
+		background: #eee;
+		position: relative;
+		box-sizing: border-box;
+		.gallery-label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: inline-block;
+			padding: 8px;
+			background: #ddd;
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 10px;
+		}
+		.block-editor-block-list__layout {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 10px;
+		}
+	}
 }

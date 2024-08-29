@@ -1,16 +1,22 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "blocks/coolslider",
+	"name": "blocks/imageblock",
 	"version": "0.1.0",
-	"title": "Cool Slider",
+	"title": "Image Block",
 	"category": "widgets",
-	"icon": "images-alt2",
-	"description": "An interactive slider.",
+	"icon": "format-image",
+	"description": "an Image to render within the slider",
 	"example": {},
 	"supports": {
 		"html": false
 	},
+	"attributes": {
+		"imageId": {
+			"type": "number"
+		}
+	},
+	"parent": ["blocks/coolslider"],
 	"textdomain": "coolslider",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

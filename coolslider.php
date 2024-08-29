@@ -28,5 +28,6 @@ if (! defined('ABSPATH')) {
 function create_block_coolslider_block_init()
 {
 	register_block_type(__DIR__ . '/build/blocks/coolSlider');
+	register_block_type(__DIR__ . '/build/blocks/imageBlock');
 }
 add_action('init', 'create_block_coolslider_block_init');

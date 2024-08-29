@@ -1,38 +1,53 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
+import {
+	useBlockProps,
+	BlockControls,
+	InnerBlocks,
+} from "@wordpress/block-editor";
+import { ToolbarGroup, ToolbarButton, Icon } from "@wordpress/components";
+import { useState } from "@wordpress/element";
+import metadata from "./block.json";
+import "./editor.scss";
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import './editor.scss';
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
- */
-export default function Edit() {
+export default function Edit(props) {
+	const [editMode, setEditMode] = useState(true);
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Cool Slider – hello from the editor!', 'coolslider' ) }
-		</p>
+		<>
+			<div {...useBlockProps()}>
+				{editMode ? (
+					<div className="edit-mode">
+						<span className="gallery-label">
+							{__("Image Gallery", metadata.textdomain)}
+						</span>
+						<InnerBlocks allowedBlocks={["blocks/imageblock"]} />
+					</div>
+				) : (
+					<div className="preview-mode">preview</div>
+				)}
+			</div>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon={
+							editMode ? (
+								<Icon icon="welcome-view-site" />
+							) : (
+								<Icon icon="edit" />
+							)
+						}
+						label={
+							editMode
+								? __("Preview gallery", metadata.textdomain)
+								: __("Edit gallery", metadata.textdomain)
+						}
+						onClick={() => {
+							setEditMode((prevState) => {
+								return (prevState = !prevState);
+							});
+						}}
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+		</>
 	);
 }
